@@ -9,17 +9,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class adminMail extends Mailable
+class adminForgetPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public $subject;
-    public function __construct($subject)
+
+    public $subject, $email, $token;
+    public function __construct($subject, $token, $email)
     {
         $this->subject = $subject;
+        $this->token = $token;
+        $this->email = $email;
     }
 
     /**
@@ -37,9 +40,13 @@ class adminMail extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'admin.auth.mail',
-        );
+        return (new Content())
+            ->view('backend.admin.auth.forget-password-mail')
+            ->with([
+                'token' => $this->token,
+                'email' => $this->email,
+            ]);
+
     }
 
     /**
