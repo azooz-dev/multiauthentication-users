@@ -34,6 +34,7 @@ Route::controller(AdminController::class)->prefix('admin')->group(function () {
     Route::post('/login-submit', 'store')->name('admin.login_submit');
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', 'index')->name('admin.dashboard');
+        Route::get('/logout', 'destroy')->name('admin.logout');
     });
 });
 require __DIR__.'/auth.php';

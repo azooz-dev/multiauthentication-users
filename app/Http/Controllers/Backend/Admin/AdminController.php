@@ -49,8 +49,10 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
-        //
+        Auth::guard('admin')->logout();
+
+        return redirect()->route('admin.login');
     }
 }
