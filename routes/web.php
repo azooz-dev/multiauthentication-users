@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Admin\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::controller(AdminController::class)->prefix('admin')->group(function () {
+    Route::get('/login', 'create')->name('admin.login');
+    Route::post('/login-submit', 'store')->name('admin.login_submit');
+    Route::middleware('admin')->group(function () {
+        
+    });
+});
 require __DIR__.'/auth.php';
