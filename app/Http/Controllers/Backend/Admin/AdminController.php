@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     /**
+     * Display a listing of the resource.
+    */
+    public function index()
+    {
+        return view('backend.admin.dashboard');
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -31,12 +39,11 @@ class AdminController extends Controller
         if (!Auth::guard('admin')->attempt($credentials)) {
 
             return redirect()->route('admin.login')->withErrors([
-                'email' => 'The provided credentials do not match our records.',
-                'password' => 'The provided credentials do not match our records.',
+                'email' => 'These credentials do not match our records.',
             ]);
         }
 
-        return redirect()->route('backend.admin.dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
     /**

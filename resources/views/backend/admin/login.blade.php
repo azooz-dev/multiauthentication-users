@@ -41,23 +41,23 @@
 										<p class="mb-0">Please log in to your account</p>
 									</div>
 									<div class="form-body">
-										<form class="row g-3" action="{{ route('admin.login_submit') }} }}" method="POST">
+										<form class="row g-3" action="{{ route('admin.login_submit') }}" method="POST">
                                             @csrf
 											<div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Email</label>
-												<input type="email" class="form-control @if ('email') invalied @endif" name="email" id="inputEmailAddress" placeholder="jhon@example.com">
-                                                @if ('email')
+												<input type="email" class="form-control @error ('email') invalied @enderror" name="email" id="inputEmailAddress" placeholder="jhon@example.com">
+                                                @error ('email')
                                                     <span class="text-danger">{{ $message }}</span>
-                                                @endif
+                                                @enderror
 											</div>
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Password</label>
 												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0 @if ('password') invalied @endif" id="inputChoosePassword" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
-                                                    @if ('password')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @endif
+													<input type="password" class="form-control border-end-0 @error ('email') invalied @enderror" name="password" id="inputChoosePassword" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
 												</div>
+                                                @error ('password')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
 											</div>
 											<div class="col-md-6">
 												<div class="form-check form-switch">

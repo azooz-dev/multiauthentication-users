@@ -33,7 +33,7 @@ Route::controller(AdminController::class)->prefix('admin')->group(function () {
     Route::get('/login', 'create')->name('admin.login');
     Route::post('/login-submit', 'store')->name('admin.login_submit');
     Route::middleware('admin')->group(function () {
-        
+        Route::get('/dashboard', 'index')->name('admin.dashboard');
     });
 });
 require __DIR__.'/auth.php';
